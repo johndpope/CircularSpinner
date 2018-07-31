@@ -18,10 +18,10 @@ import UIKit
     case indeterminate
 }
 
-open class CircularSpinner: UIView {
+@objc  open class CircularSpinner: UIView {
     
     // MARK: - singleton
-    static open let sharedInstance = CircularSpinner(frame: CGRect.zero)
+    @objc  static open let sharedInstance = CircularSpinner(frame: CGRect.zero)
     
     
     // MARK: - outlets
@@ -141,7 +141,7 @@ open class CircularSpinner: UIView {
     
     
     // MARK: - drawing methods
-    open override func draw(_ rect: CGRect) {
+    @objc  open override func draw(_ rect: CGRect) {
         backgroundCircleLayer.path = getCirclePath()
         progressCircleLayer.path = getCirclePath()
         updateFrame()
@@ -218,7 +218,7 @@ open class CircularSpinner: UIView {
         return customSuperview ?? UIApplication.shared.keyWindow
     }
     
-    open class func useContainerView(_ sv: UIView?) {
+    @objc  open class func useContainerView(_ sv: UIView?) {
         customSuperview = sv
     }
     
@@ -275,7 +275,7 @@ open class CircularSpinner: UIView {
     
     
     // MARK: - update
-    open class func setValue(_ value: Float, animated: Bool) {
+    @objc  open class func setValue(_ value: Float, animated: Bool) {
         let spinner = CircularSpinner.sharedInstance
         guard spinner.type == .determinate else { return }
         
@@ -333,7 +333,7 @@ open class CircularSpinner: UIView {
 // MARK: - API
 extension CircularSpinner {
     
-    open class func show(_ title: String = "", animated: Bool = true, type: CircularSpinnerType = .determinate, showDismissButton: Any? = nil, delegate: CircularSpinnerDelegate? = nil) {
+    @objc  open class func show(_ title: String = "", animated: Bool = true, type: CircularSpinnerType = .determinate, showDismissButton: Any? = nil, delegate: CircularSpinnerDelegate? = nil) {
         let spinner = CircularSpinner.sharedInstance
         spinner.type = type
         spinner.delegate = delegate
@@ -359,7 +359,7 @@ extension CircularSpinner {
         NotificationCenter.default.addObserver(spinner, selector: #selector(updateFrame), name: NSNotification.Name.UIApplicationDidChangeStatusBarOrientation, object: nil)
     }
     
-    open class func hide(_ completion: (() -> Void)? = nil) {
+    @objc  open class func hide(_ completion: (() -> Void)? = nil) {
         let spinner = CircularSpinner.sharedInstance
         spinner.stopInderminateAnimation()
         
